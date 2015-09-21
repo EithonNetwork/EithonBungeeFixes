@@ -11,7 +11,8 @@ import net.md_5.bungee.api.plugin.Command;
 public class ServerCommand extends Command {
 
 	public ServerCommand() {
-		super("eserver","permissions.eserver",new String[0]);
+		super("eserver");
+		//super("eserver","permissions.eserver",new String[0]);
 	}
 
 	@Override
@@ -21,20 +22,28 @@ public class ServerCommand extends Command {
 			return;
 		}
 		
-		if (args.length > 0) {
-			for (String string : args) {
-				ComponentBuilder cb = new ComponentBuilder(string);
-				sender.sendMessage(cb.color(ChatColor.BLUE).create());
-			}
-		}
-
-		ProxiedPlayer player = (ProxiedPlayer) sender;
-		String serverName = "builder";
-		if (playerServerHasName(player, serverName))  {
-			player.sendMessage(new ComponentBuilder("You are already connected to the Hub!").color(ChatColor.RED).create());
+		// Get the server name
+		if (args.length != 1) {
+			sender.sendMessage(new ComponentBuilder("Usage: /eserver <server name>").color(ChatColor.RED).create());
 			return;
 		}
-		ServerInfo target = ProxyServer.getInstance().getServerInfo("Hub");
+		String serverName = args[0];
+
+		// Already connected?
+		ProxiedPlayer player = (ProxiedPlayer) sender;
+		if (playerServerHasName(player, serverName))  {
+			sender.sendMessage(new ComponentBuilder(String.format("You are already connected to the server %s", serverName)).color(ChatColor.YELLOW).create());
+			return;
+		}
+		
+		// Find server
+		ServerInfo target = ProxyServer.getInstance().getServerInfo(serverName);
+		if (target == null) {
+			sender.sendMessage(new ComponentBuilder(String.format("Could not find the server %s", serverName)).color(ChatColor.RED).create());
+			return;			
+		}
+		
+		// Connect player
 		player.connect(target);
 	}
 
