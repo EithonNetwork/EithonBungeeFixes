@@ -1,0 +1,8 @@
+name: EithonBungeeFixes
+main: net.eithon.plugin.bungeefixes.EithonBungeeFixes
+version: 0.1
+author: vanbrayne
+permissions:
+  eserver:
+    description: Access to /eithonfixes eserver command
+    default: op
