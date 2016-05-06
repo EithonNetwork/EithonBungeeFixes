@@ -26,8 +26,9 @@ public class Controller {
 
 	public void playerDisconnnected(ProxiedPlayer player) {
 		final String playerUuid = player.getUniqueId().toString();
+		final String serverName = player.getServer().getInfo().getName();
 		for (Server server : getServers()) {
-			sendMessage(server, PLAYER_DISCONNECTED, ProxyServer.getInstance().getName(), playerUuid);
+			sendMessage(server, PLAYER_DISCONNECTED, serverName, playerUuid);
 		}
 	}
 
