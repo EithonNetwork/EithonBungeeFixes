@@ -13,6 +13,7 @@ import net.md_5.bungee.api.connection.Server;
 
 public class Controller {
 
+	private static final String PLAYER_DISCONNECTED = "PlayerDisconnected";
 	private static final String EITHON_BUNGEE_FIXES_CHANNEL = "EithonBungeeFixes";
 	
 	public Controller() {
@@ -26,7 +27,7 @@ public class Controller {
 	public void playerDisconnnected(ProxiedPlayer player) {
 		final String playerUuid = player.getUniqueId().toString();
 		for (Server server : getServers()) {
-			sendMessage(server, "PlayerDisconnected", playerUuid);
+			sendMessage(server, PLAYER_DISCONNECTED, ProxyServer.getInstance().getName(), playerUuid);
 		}
 	}
 
