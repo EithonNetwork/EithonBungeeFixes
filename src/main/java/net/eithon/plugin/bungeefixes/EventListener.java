@@ -19,5 +19,4 @@ public class EventListener implements Listener {
     public void onPlayerDisconnectEvent(PlayerDisconnectEvent event) {
 		this._controller.playerDisconnnected(event.getPlayer());
     }
-
 }

@@ -1,6 +1,6 @@
 name: EithonBungeeFixes
 main: net.eithon.plugin.bungeefixes.EithonBungeeFixes
-version: 0.1
+version: ${project.version}
 author: vanbrayne
 permissions:
   eserver:

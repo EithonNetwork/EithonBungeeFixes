@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.UUID;
 
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ServerInfo;
@@ -25,10 +26,11 @@ public class Controller {
 	}
 
 	public void playerDisconnnected(ProxiedPlayer player) {
-		final String playerUuid = player.getUniqueId().toString();
 		final String serverName = player.getServer().getInfo().getName();
+		final UUID playerId = player.getUniqueId();
+		final String playerName = player.getName();
 		for (Server server : getServers()) {
-			sendMessage(server, PLAYER_DISCONNECTED, serverName, playerUuid);
+			sendMessage(server, PLAYER_DISCONNECTED, serverName, playerId.toString(), playerName);
 		}
 	}
 
